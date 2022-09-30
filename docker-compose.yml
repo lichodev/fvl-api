@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: 'db_fvl'
+    image: 'postgres:latest'
+    restart: always
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data/pgdata
+    environment:
+      - POSTGRES_USER=fvl
+      - POSTGRES_PASSWORD=segura123!
+      - POSTGRES_DB=db_fvl
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - '5432:5432'

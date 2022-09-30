@@ -18,13 +18,8 @@ export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
   @Get()
-  getAllTeams(@Query() query: QueryTeamsDto) {
-    const { country } = query;
-    let results = this.teamsService.getAll();
-    if (country)
-      results = results.filter(
-        (team) => team.country.toLowerCase() == country.toLowerCase(),
-      );
+  getAllTeams() {
+    const results = this.teamsService.getAll();
     return results;
   }
 

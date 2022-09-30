@@ -1,40 +1,37 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateTeamDto } from './dto/create-team-dto';
-import { Team } from './interfaces/team.interface';
+import { UpdateTeamDto } from './dto/update-team-dto';
+import { Team } from './entities/team.entity';
 
 @Injectable()
 export class TeamsService {
-  private teams: Team[] = [];
+  constructor(
+    @InjectRepository(Team) private teamsRepository: Repository<Team>,
+  ) {}
 
   getAll() {
-    return this.teams;
+    return this.teamsRepository.find();
   }
 
-  add(newTeamDto: CreateTeamDto) {
-    const newTeam: Team = { id: this.teams.length, ...newTeamDto };
-    this.teams.push(newTeam);
-    return newTeam;
+  add(createTeamDto: CreateTeamDto) {
+    return this.teamsRepository.save(createTeamDto);
   }
 
-  getById(queryId: number) {
-    const result = this.teams.find((team) => team.id == queryId);
-    if (result === undefined)
+  async getById(id: number) {
+    const result = await this.teamsRepository.findOneBy({ id });
+    if (result === null)
       throw new HttpException('Team not found', HttpStatus.NOT_FOUND);
     return result;
   }
 
-  update(id: number, bodyTeamDto: CreateTeamDto) {
-    const { country, location, name, short_name } = bodyTeamDto;
-    const team = this.getById(id);
-    team.country = country;
-    team.location = location;
-    team.name = name;
-    team.short_name = short_name;
-    return team;
+  async update(id: number, updateTeamDto: UpdateTeamDto) {
+    await this.teamsRepository.update({ id }, updateTeamDto);
+    return this.teamsRepository.findOneBy({ id });
   }
 
-  delete(id: number) {
-    const pos = this.teams.indexOf(this.getById(id));
-    this.teams.splice(pos, 1);
+  async delete(id: number) {
+    await this.teamsRepository.delete({ id });
   }
 }

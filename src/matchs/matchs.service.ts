@@ -1,47 +1,36 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateMatchDto } from './dto/create-match-dto';
 import { UpdateMatchDto } from './dto/update-matchs-dto';
-import { Match } from './interfaces/matchs.interface';
+import { Match } from './entities/matchs.entity';
 
 @Injectable()
 export class MatchsService {
-  private matchs: Match[] = [];
+  constructor(
+    @InjectRepository(Match) private matchRepository: Repository<Match>,
+  ) {}
 
   getAll() {
-    return this.matchs;
+    return this.matchRepository.find();
   }
 
-  getById(queryId: number) {
-    const result = this.matchs.find((matchs) => matchs.id == queryId);
-    if (result === undefined)
+  async getById(id: number) {
+    const result = await this.matchRepository.findOneBy({ id });
+    if (result === null)
       throw new HttpException('Match not found', HttpStatus.NOT_FOUND);
     return result;
   }
 
   add(createMatchDto: CreateMatchDto) {
-    const newMatch: Match = {
-      id: this.matchs.length,
-      ...createMatchDto,
-    };
-    this.matchs.push(newMatch);
-    return newMatch;
+    return this.matchRepository.save(createMatchDto);
   }
 
   update(id: number, updateMatchDto: UpdateMatchDto) {
-    const { fecha, id_local, id_visitante, lugar, sets_local, sets_visitante } =
-      updateMatchDto;
-    const match = this.getById(id);
-    match.fecha = fecha;
-    match.id_local = id_local;
-    match.id_visitante = id_visitante;
-    match.lugar = lugar;
-    match.sets_local = sets_local;
-    match.sets_visitante = sets_visitante;
-    return match;
+    return this.matchRepository.update({ id }, updateMatchDto);
   }
 
-  delete(id: number) {
-    const pos = this.matchs.indexOf(this.getById(id));
-    this.matchs.splice(pos, 1);
+  async delete(id: number) {
+    await this.matchRepository.delete(id);
   }
 }
