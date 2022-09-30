@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { BodyTeamDto } from './dto/body-team.dto';
+import { CreateTeamDto } from './dto/create-team-dto';
 import { Team } from './interfaces/team.interface';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class TeamsService {
     return this.teams;
   }
 
-  add(newTeamDto: BodyTeamDto) {
+  add(newTeamDto: CreateTeamDto) {
     const newTeam: Team = { id: this.teams.length, ...newTeamDto };
     this.teams.push(newTeam);
     return newTeam;
@@ -23,7 +23,7 @@ export class TeamsService {
     return result;
   }
 
-  update(id: number, bodyTeamDto: BodyTeamDto) {
+  update(id: number, bodyTeamDto: CreateTeamDto) {
     const { country, location, name, short_name } = bodyTeamDto;
     const team = this.getById(id);
     team.country = country;

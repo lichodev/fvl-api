@@ -8,8 +8,9 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { BodyTeamDto } from './dto/body-team.dto';
+import { CreateTeamDto } from './dto/create-team-dto';
 import { QueryTeamsDto } from './dto/query-teams.dto';
+import { UpdateTeamDto } from './dto/update-team-dto';
 import { TeamsService } from './teams.service';
 
 @Controller('teams')
@@ -34,13 +35,13 @@ export class TeamsController {
   }
 
   @Post()
-  addNewTeam(@Body() bodyTeamDto: BodyTeamDto) {
-    return this.teamsService.add(bodyTeamDto);
+  addNewTeam(@Body() createTeamDto: CreateTeamDto) {
+    return this.teamsService.add(createTeamDto);
   }
 
   @Put('/:id')
-  updateTeam(@Param('id') id: number, @Body() bodyTeamDto: BodyTeamDto) {
-    return this.teamsService.update(id, bodyTeamDto);
+  updateTeam(@Param('id') id: number, @Body() updateTeamDto: UpdateTeamDto) {
+    return this.teamsService.update(id, updateTeamDto);
   }
 
   @Delete('/:id')

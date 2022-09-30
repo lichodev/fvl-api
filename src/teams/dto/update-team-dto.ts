@@ -1,5 +1,4 @@
-export class Team {
-  id: number;
+export interface UpdateTeamDto {
   name: string;
   short_name: string;
   country: string;
