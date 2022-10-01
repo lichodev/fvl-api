@@ -6,10 +6,8 @@ import {
   Param,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 import { CreateTeamDto } from './dto/create-team-dto';
-import { QueryTeamsDto } from './dto/query-teams.dto';
 import { UpdateTeamDto } from './dto/update-team-dto';
 import { TeamsService } from './teams.service';
 
