@@ -28,10 +28,11 @@ export class TeamsService {
 
   async update(id: number, updateTeamDto: UpdateTeamDto) {
     await this.teamsRepository.update({ id }, updateTeamDto);
-    return this.teamsRepository.findOneBy({ id });
+    return await this.getById(id);
   }
 
   async delete(id: number) {
+    await this.getById(id);
     await this.teamsRepository.delete({ id });
   }
 }

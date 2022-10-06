@@ -15,6 +15,10 @@ export class MatchsService {
     return this.matchRepository.find();
   }
 
+  add(createMatchDto: CreateMatchDto) {
+    return this.matchRepository.save(createMatchDto);
+  }
+
   async getById(id: number) {
     const result = await this.matchRepository.findOneBy({ id });
     if (result === null)
@@ -22,15 +26,13 @@ export class MatchsService {
     return result;
   }
 
-  add(createMatchDto: CreateMatchDto) {
-    return this.matchRepository.save(createMatchDto);
-  }
-
-  update(id: number, updateMatchDto: UpdateMatchDto) {
-    return this.matchRepository.update({ id }, updateMatchDto);
+  async update(id: number, updateMatchDto: UpdateMatchDto) {
+    await this.matchRepository.update({ id }, updateMatchDto);
+    return await this.getById(id);
   }
 
   async delete(id: number) {
+    await this.getById(id);
     await this.matchRepository.delete(id);
   }
 }
