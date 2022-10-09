@@ -25,7 +25,7 @@ export class MatchsController {
 
   @Get('/:id')
   getMatchById(@Param('id') id: number) {
-    return this.matchsService.getById(id);
+    return this.matchsService.getById(id, true);
   }
 
   @Post()

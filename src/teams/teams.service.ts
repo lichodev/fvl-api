@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { CreateTeamDto } from './dto/create-team-dto';
 import { UpdateTeamDto } from './dto/update-team-dto';
 import { Team } from './entities/team.entity';
@@ -19,15 +19,23 @@ export class TeamsService {
     return this.teamsRepository.save(createTeamDto);
   }
 
-  async getById(id: number) {
+  async getById(id: number, populate = false) {
+    let options: FindOneOptions<Team> = {};
+
+    if (populate) {
+      options = {
+        relations: {
+          matchs: {
+            local: true,
+            visitante: true,
+          },
+        },
+      };
+    }
+
     const result = await this.teamsRepository.findOne({
       where: { id },
-      relations: {
-        matchs: {
-          local: true,
-          visitante: true,
-        },
-      },
+      ...options,
     });
 
     if (result === null)

@@ -1,26 +1,14 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank">
+    <img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" />
+  </a>
+  <a href="https://exa.unicen.edu.ar" target="blank">
+    <img src="https://exa.unicen.edu.ar/wp-content/uploads/2021/03/u249.png" width="200" alt="FCEx Logo" />
+  </a>
 </p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
@@ -45,28 +33,203 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## API Endpoints
 
-```bash
-# unit tests
-$ npm run test
+### Matchs
 
-# e2e tests
-$ npm run test:e2e
+`GET \matchs`
 
-# test coverage
-$ npm run test:cov
-```
+Retrieve all Matchs.
 
-## Support
+- Query parameters
+  - `populate`: Boolean. Example: `GET \matchs?populate=true`
+- Response
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+  ```json
+  [
+    {
+      "id": number,
+      // If populate truthy, sends team object instead of id
+      "local": Team | number,
+      "visitante": Team | number,
+      "sets_local": number,
+      "sets_visitante": number
+    },
+    ...
+  ]
+  ```
 
-## Stay in touch
+`GET \matchs\:id`
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Retrieve a single Match data, including teams objects.
+
+- Response:
+
+  ```json
+  {
+    "id": number,
+    "local": Team,
+    "visitante": Team,
+    "sets_local": number,
+    "sets_visitante": number
+  }
+  ```
+
+`POST \matchs\`
+
+Creates a new Match
+
+- Request body:
+
+  ```json
+  {
+    "local": number,          // Team id
+    "visitante": number,      // Team id
+    "sets_local": number,
+    "sets_visitante": number
+  }
+  ```
+
+- Response:
+
+  ```json
+  {
+    "id": number,
+    "local": number,          // Team id
+    "visitante": number,      // Team id
+    "sets_local": number,
+    "sets_visitante": number
+  }
+  ```
+
+`PUT \matchs\:id`
+
+Updates an existing Match
+
+- Request body:
+
+  ```json
+  {
+    "local": number,          // Team id
+    "visitante": number,      // Team id
+    "sets_local": number,
+    "sets_visitante": number
+  }
+  ```
+
+- Response:
+
+  ```json
+  {
+    "id": number,
+    "local": number,
+    "visitante": number,
+    "sets_local": number,
+    "sets_visitante": number
+  }
+  ```
+
+`DELETE \matchs\:id`
+
+Deletes an existing Match. If successful, no response is sent.
+
+### Teams
+
+`GET \teams`
+
+Retrieve all teams.
+
+- Query parameters
+  - `populate`: Boolean. Example: `GET \teams?populate=true`
+- Response
+
+  ```json
+  [
+    {
+        "id": number,
+        "name": string,
+        "short_name": string,
+        "country": string,
+        "location": string
+    },
+    ...
+  ]
+  ```
+
+`GET \teams\:id`
+
+Retrieve a single Team data, including an array with Matchs played.
+
+- Response:
+
+  ```json
+  {
+    "id": number,
+    "name": string,
+    "short_name": string,
+    "country": string,
+    "location": string,
+    "matchs": Match[]
+  }
+  ```
+
+`POST \teams\`
+
+Creates a new Team
+
+- Request body:
+
+  ```json
+  {
+    "name": string,
+    "short_name": string,
+    "country": string,
+    "location": string
+  }
+  ```
+
+- Response:
+
+  ```json
+  {
+    "id": number,
+    "name": string,
+    "short_name": string,
+    "country": string,
+    "location": string
+  }
+  ```
+
+`PUT \teams\:id`
+
+Updates an existing Team
+
+- Request body:
+
+  ```json
+  {
+    "name": string,
+    "short_name": string,
+    "country": string,
+    "location": string
+  }
+  ```
+
+- Response:
+
+  ```json
+  {
+    "id": number,
+    "name": string,
+    "short_name": string,
+    "country": string,
+    "location": string
+  }
+  ```
+
+`DELETE \teams\:id`
+
+Deletes an existing Team. If successful, no response is sent.
 
 ## License
 

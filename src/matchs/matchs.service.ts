@@ -30,13 +30,17 @@ export class MatchsService {
     return this.matchRepository.save(createMatchDto);
   }
 
-  async getById(id: number) {
-    const options = {
-      relations: {
-        local: true,
-        visitante: true,
-      },
-    };
+  async getById(id: number, populate = false) {
+    let options: FindOneOptions<Match> = { loadRelationIds: true };
+
+    if (populate) {
+      options = {
+        relations: {
+          local: true,
+          visitante: true,
+        },
+      };
+    }
 
     const result = await this.matchRepository.findOne({
       where: { id },

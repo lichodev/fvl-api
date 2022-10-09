@@ -23,7 +23,7 @@ export class TeamsController {
 
   @Get('/:id')
   getById(@Param('id') id: number) {
-    const query = this.teamsService.getById(id);
+    const query = this.teamsService.getById(id, true);
     return query;
   }
 
