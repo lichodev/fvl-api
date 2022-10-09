@@ -1,8 +1,6 @@
 export interface UpdateMatchDto {
-  id_local: number;
-  id_visitante: number;
+  local: number;
+  visitante: number;
   sets_local: number;
   sets_visitante: number;
-  fecha: string;
-  lugar: string;
 }

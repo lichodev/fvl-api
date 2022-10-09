@@ -6,8 +6,10 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateMatchDto } from './dto/create-match-dto';
+import { QueryMatchDto } from './dto/query-match-dto';
 import { UpdateMatchDto } from './dto/update-matchs-dto';
 import { MatchsService } from './matchs.service';
 
@@ -16,8 +18,9 @@ export class MatchsController {
   constructor(private readonly matchsService: MatchsService) {}
 
   @Get()
-  getAllMatchs() {
-    return this.matchsService.getAll();
+  getAllMatchs(@Query() query: QueryMatchDto) {
+    const { populate } = query;
+    return this.matchsService.getAll(populate);
   }
 
   @Get('/:id')

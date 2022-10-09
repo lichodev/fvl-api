@@ -1,15 +1,28 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Team } from 'src/teams/entities/team.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Match {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column('int')
-  id_local: number;
-  @Column('int')
-  id_visitante: number;
+
+  @ManyToOne(() => Team, { onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'id_local' })
+  local: number | Team;
+
+  @ManyToOne(() => Team, { onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'id_visitante' })
+  visitante: number | Team;
+
   @Column('int')
   sets_local: number;
+
   @Column('int')
   sets_visitante: number;
 }
