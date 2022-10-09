@@ -48,14 +48,14 @@ Retrieve all Matchs.
   ```json
   [
     {
-      "id": number,
+      "id": "number",
       // If populate truthy, sends team object instead of id
-      "local": Team | number,
-      "visitante": Team | number,
-      "sets_local": number,
-      "sets_visitante": number
-    },
-    ...
+      "local": "Team | number",
+      "visitante": "Team | number",
+      "sets_local": "number",
+      "sets_visitante": "number"
+    }
+    // ...
   ]
   ```
 
@@ -67,11 +67,11 @@ Retrieve a single Match data, including teams objects.
 
   ```json
   {
-    "id": number,
-    "local": Team,
-    "visitante": Team,
-    "sets_local": number,
-    "sets_visitante": number
+    "id": "number",
+    "local": "Team",
+    "visitante": "Team",
+    "sets_local": "number",
+    "sets_visitante": "number"
   }
   ```
 
@@ -83,10 +83,10 @@ Creates a new Match
 
   ```json
   {
-    "local": number,          // Team id
-    "visitante": number,      // Team id
-    "sets_local": number,
-    "sets_visitante": number
+    "local": "number", // Team id
+    "visitante": "number", // Team id
+    "sets_local": "number",
+    "sets_visitante": "number"
   }
   ```
 
@@ -94,11 +94,11 @@ Creates a new Match
 
   ```json
   {
-    "id": number,
-    "local": number,          // Team id
-    "visitante": number,      // Team id
-    "sets_local": number,
-    "sets_visitante": number
+    "id": "number",
+    "local": "number", // Team id
+    "visitante": "number", // Team id
+    "sets_local": "number",
+    "sets_visitante": "number"
   }
   ```
 
@@ -110,10 +110,10 @@ Updates an existing Match
 
   ```json
   {
-    "local": number,          // Team id
-    "visitante": number,      // Team id
-    "sets_local": number,
-    "sets_visitante": number
+    "local": "number", // Team id
+    "visitante": "number", // Team id
+    "sets_local": "number",
+    "sets_visitante": "number"
   }
   ```
 
@@ -121,11 +121,11 @@ Updates an existing Match
 
   ```json
   {
-    "id": number,
-    "local": number,
-    "visitante": number,
-    "sets_local": number,
-    "sets_visitante": number
+    "id": "number",
+    "local": "number",
+    "visitante": "number",
+    "sets_local": "number",
+    "sets_visitante": "number"
   }
   ```
 
@@ -139,20 +139,18 @@ Deletes an existing Match. If successful, no response is sent.
 
 Retrieve all teams.
 
-- Query parameters
-  - `populate`: Boolean. Example: `GET \teams?populate=true`
 - Response
 
   ```json
   [
     {
-        "id": number,
-        "name": string,
-        "short_name": string,
-        "country": string,
-        "location": string
-    },
-    ...
+      "id": "number",
+      "name": "string",
+      "short_name": "string",
+      "country": "string",
+      "location": "string"
+    }
+    // ...
   ]
   ```
 
@@ -164,12 +162,12 @@ Retrieve a single Team data, including an array with Matchs played.
 
   ```json
   {
-    "id": number,
-    "name": string,
-    "short_name": string,
-    "country": string,
-    "location": string,
-    "matchs": Match[]
+    "id": "number",
+    "name": "string",
+    "short_name": "string",
+    "country": "string",
+    "location": "string",
+    "matchs": "Match[]"
   }
   ```
 
@@ -181,10 +179,10 @@ Creates a new Team
 
   ```json
   {
-    "name": string,
-    "short_name": string,
-    "country": string,
-    "location": string
+    "name": "string",
+    "short_name": "string",
+    "country": "string",
+    "location": "string"
   }
   ```
 
@@ -192,11 +190,11 @@ Creates a new Team
 
   ```json
   {
-    "id": number,
-    "name": string,
-    "short_name": string,
-    "country": string,
-    "location": string
+    "id": "number",
+    "name": "string",
+    "short_name": "string",
+    "country": "string",
+    "location": "string"
   }
   ```
 
@@ -208,10 +206,10 @@ Updates an existing Team
 
   ```json
   {
-    "name": string,
-    "short_name": string,
-    "country": string,
-    "location": string
+    "name": "string",
+    "short_name": "string",
+    "country": "string",
+    "location": "string"
   }
   ```
 
@@ -219,11 +217,11 @@ Updates an existing Team
 
   ```json
   {
-    "id": number,
-    "name": string,
-    "short_name": string,
-    "country": string,
-    "location": string
+    "id": "number",
+    "name": "string",
+    "short_name": "string",
+    "country": "string",
+    "location": "string"
   }
   ```
 
