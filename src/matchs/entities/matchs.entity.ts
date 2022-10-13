@@ -12,11 +12,11 @@ export class Match {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Team, { onDelete: 'SET NULL' })
+  @ManyToOne(() => Team)
   @JoinColumn({ name: 'id_local' })
   local: number | Team;
 
-  @ManyToOne(() => Team, { onDelete: 'SET NULL' })
+  @ManyToOne(() => Team)
   @JoinColumn({ name: 'id_visitante' })
   visitante: number | Team;
 

@@ -5,11 +5,30 @@ import { CreateMatchDto } from './dto/create-match-dto';
 import { UpdateMatchDto } from './dto/update-matchs-dto';
 import { Match } from './entities/matchs.entity';
 
+type ConstrainError = {
+  code: string;
+  detail: string;
+};
+
 @Injectable()
 export class MatchsService {
   constructor(
     @InjectRepository(Match) private matchRepository: Repository<Match>,
   ) {}
+
+  private handleConstrainError({ code, detail }: ConstrainError) {
+    if (code === '23503') {
+      // Remove table name from error message on fk constrain error
+      const errorMessage = detail.split(' ').splice(0, 5).join(' ');
+      throw new HttpException(errorMessage, HttpStatus.NOT_FOUND);
+    }
+
+    // If any other error, throw generic exception
+    throw new HttpException(
+      'Internal server error',
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
+  }
 
   getAll(populate = false) {
     let options: FindManyOptions<Match> = { loadRelationIds: true };
@@ -27,7 +46,10 @@ export class MatchsService {
   }
 
   add(createMatchDto: CreateMatchDto) {
-    return this.matchRepository.save(createMatchDto);
+    return this.matchRepository
+      .save(createMatchDto)
+      .then((res) => res)
+      .catch(this.handleConstrainError);
   }
 
   async getById(id: number, populate = false) {
@@ -53,7 +75,9 @@ export class MatchsService {
   }
 
   async update(id: number, updateMatchDto: UpdateMatchDto) {
-    await this.matchRepository.update({ id }, updateMatchDto);
+    await this.matchRepository
+      .update({ id }, updateMatchDto)
+      .catch(this.handleConstrainError);
     return await this.getById(id);
   }
 
