@@ -167,7 +167,8 @@ Retrieve a single Team data, including an array with Matchs played.
     "short_name": "string",
     "country": "string",
     "location": "string",
-    "matchs": "Match[]"
+    "matchsLocal": "Match[]",
+    "matchsVisitante": "Match[]"
   }
   ```
 

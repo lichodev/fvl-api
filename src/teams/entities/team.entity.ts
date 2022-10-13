@@ -18,6 +18,9 @@ export class Team {
   @Column()
   location: string;
 
-  @OneToMany(() => Match, (match) => match.local || match.visitante)
-  matchs: Match[];
+  @OneToMany(() => Match, (match) => match.local)
+  matchsLocal: Match[];
+
+  @OneToMany(() => Match, (match) => match.visitante)
+  matchsVisitante: Match[];
 }

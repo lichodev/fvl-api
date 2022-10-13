@@ -11,6 +11,19 @@ export class TeamsService {
     @InjectRepository(Team) private teamsRepository: Repository<Team>,
   ) {}
 
+  private handleConstrainError({ code }) {
+    if (code === '23503')
+      throw new HttpException(
+        'Team is still referenced in a Match',
+        HttpStatus.CONFLICT,
+      );
+
+    throw new HttpException(
+      'Internal Server Error',
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
+  }
+
   getAll() {
     return this.teamsRepository.find();
   }
@@ -25,7 +38,11 @@ export class TeamsService {
     if (populate) {
       options = {
         relations: {
-          matchs: {
+          matchsLocal: {
+            local: true,
+            visitante: true,
+          },
+          matchsVisitante: {
             local: true,
             visitante: true,
           },
@@ -50,6 +67,6 @@ export class TeamsService {
 
   async delete(id: number) {
     await this.getById(id);
-    await this.teamsRepository.delete({ id });
+    await this.teamsRepository.delete({ id }).catch(this.handleConstrainError);
   }
 }
