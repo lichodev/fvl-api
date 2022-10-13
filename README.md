@@ -37,29 +37,29 @@ $ npm run start:prod
 
 ### Matchs
 
-`GET \matchs`
+`GET /matchs`
 
 Retrieve all Matchs.
 
 - Query parameters
-  - `populate`: Boolean. Example: `GET \matchs?populate=true`
+  - `populate`: Boolean. Example: `GET /matchs?populate=true`
 - Response
 
-  ```json
+  ```js
   [
     {
-      "id": "number",
+      id: 'number',
       // If populate truthy, sends team object instead of id
-      "local": "Team | number",
-      "visitante": "Team | number",
-      "sets_local": "number",
-      "sets_visitante": "number"
-    }
+      local: 'Team | number',
+      visitante: 'Team | number',
+      sets_local: 'number',
+      sets_visitante: 'number',
+    },
     // ...
-  ]
+  ];
   ```
 
-`GET \matchs\:id`
+`GET /matchs/:id`
 
 Retrieve a single Match data, including teams objects.
 
@@ -75,43 +75,16 @@ Retrieve a single Match data, including teams objects.
   }
   ```
 
-`POST \matchs\`
+`POST /matchs/`
 
-Creates a new Match
-
-- Request body:
-
-  ```json
-  {
-    "local": "number", // Team id
-    "visitante": "number", // Team id
-    "sets_local": "number",
-    "sets_visitante": "number"
-  }
-  ```
-
-- Response:
-
-  ```json
-  {
-    "id": "number",
-    "local": "number", // Team id
-    "visitante": "number", // Team id
-    "sets_local": "number",
-    "sets_visitante": "number"
-  }
-  ```
-
-`PUT \matchs\:id`
-
-Updates an existing Match
+Creates a new Match. "Local" and "Visitante" are Team's ID.
 
 - Request body:
 
   ```json
   {
-    "local": "number", // Team id
-    "visitante": "number", // Team id
+    "local": "number",
+    "visitante": "number",
     "sets_local": "number",
     "sets_visitante": "number"
   }
@@ -129,32 +102,59 @@ Updates an existing Match
   }
   ```
 
-`DELETE \matchs\:id`
+`PUT /matchs/:id`
+
+Updates an existing Match
+
+- Request body:
+
+  ```json
+  {
+    "local": "number",
+    "visitante": "number",
+    "sets_local": "number",
+    "sets_visitante": "number"
+  }
+  ```
+
+- Response:
+
+  ```json
+  {
+    "id": "number",
+    "local": "number",
+    "visitante": "number",
+    "sets_local": "number",
+    "sets_visitante": "number"
+  }
+  ```
+
+`DELETE /matchs/:id`
 
 Deletes an existing Match. If successful, no response is sent.
 
 ### Teams
 
-`GET \teams`
+`GET /teams`
 
 Retrieve all teams.
 
 - Response
 
-  ```json
+  ```js
   [
     {
-      "id": "number",
-      "name": "string",
-      "short_name": "string",
-      "country": "string",
-      "location": "string"
-    }
+      id: 'number',
+      name: 'string',
+      short_name: 'string',
+      country: 'string',
+      location: 'string',
+    },
     // ...
-  ]
+  ];
   ```
 
-`GET \teams\:id`
+`GET /teams/:id`
 
 Retrieve a single Team data, including an array with Matchs played.
 
@@ -171,7 +171,7 @@ Retrieve a single Team data, including an array with Matchs played.
   }
   ```
 
-`POST \teams\`
+`POST /teams/`
 
 Creates a new Team
 
@@ -198,7 +198,7 @@ Creates a new Team
   }
   ```
 
-`PUT \teams\:id`
+`PUT /teams/:id`
 
 Updates an existing Team
 
@@ -225,7 +225,7 @@ Updates an existing Team
   }
   ```
 
-`DELETE \teams\:id`
+`DELETE /teams/:id`
 
 Deletes an existing Team. If successful, no response is sent.
 
