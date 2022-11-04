@@ -31,7 +31,10 @@ export class MatchsService {
   }
 
   getAll(populate = false) {
-    let options: FindManyOptions<Match> = { loadRelationIds: true };
+    let options: FindManyOptions<Match> = {
+      loadRelationIds: true,
+      order: { id: 'desc' },
+    };
 
     if (populate) {
       options = {
@@ -39,6 +42,7 @@ export class MatchsService {
           local: true,
           visitante: true,
         },
+        order: { id: 'desc' },
       };
     }
 
