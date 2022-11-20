@@ -4,6 +4,7 @@ services:
     container_name: 'db_fvl'
     image: 'postgres:latest'
     restart: always
+    network_mode: bridge
     volumes:
       - ./pg_data:/var/lib/postgresql/data/pgdata
     environment:
@@ -13,3 +14,7 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
       - '5432:5432'
+
+networks:
+  bridge:
+    external: true
