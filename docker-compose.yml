@@ -1,10 +1,21 @@
+# Compose file for DEVELOPMENT
+
 version: '3.8'
 services:
+  nest:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./:/opt/app
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+
   postgres:
-    container_name: 'db_fvl'
     image: 'postgres:latest'
     restart: always
-    network_mode: bridge
     volumes:
       - ./pg_data:/var/lib/postgresql/data/pgdata
     environment:
@@ -15,6 +26,3 @@ services:
     ports:
       - '5432:5432'
 
-networks:
-  bridge:
-    external: true
