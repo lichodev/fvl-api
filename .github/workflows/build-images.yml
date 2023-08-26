@@ -5,7 +5,7 @@ on:
     types: [published]
 
 env:
-  NAME: ${{ secrets.DOCKERHUB_USERNAME }}/fvl-api
+  NAME: lichodev/fvl-api
 
 jobs:
   build:
