@@ -1,7 +1,8 @@
-FROM node:17.9-alpine
+FROM node:17-alpine
+
+ENV NODE_ENV production
 
 WORKDIR /opt/app
-ENV NODE_ENV production
 
 # Install depedencies
 COPY package*.json .
