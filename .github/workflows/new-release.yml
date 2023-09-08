@@ -8,8 +8,14 @@ env:
   NAME: lichodev/fvl-api
 
 jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/new-release.yml@main
+
   build:
     runs-on: ubuntu-latest
+    needs: [run-tests]
 
     steps:
       - uses: actions/checkout@v3
