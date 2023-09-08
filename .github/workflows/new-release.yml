@@ -11,7 +11,7 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/new-release.yml@main
+      - uses: ./.github/workflows/run-tests.yml@main
 
   build:
     runs-on: ubuntu-latest
