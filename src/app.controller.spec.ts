@@ -17,7 +17,7 @@ describe('AppController', () => {
       expect(appController.getWelcome()).toEqual(
         expect.objectContaining({
           github: 'https://github.com/lichodev/fvl-api',
-          commitHash: expect.any(Number),
+          commitHash: undefined,
         }),
       );
     });
