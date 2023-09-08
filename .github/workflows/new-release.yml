@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build Images and Deploy
 
 on:
   release:
@@ -12,10 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Get repository'
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: 'Get version'
+      - name: 'Get tag version'
         uses: battila7/get-version-action@v2.2.1
         id: version
 
