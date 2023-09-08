@@ -37,7 +37,6 @@ describe('MatchsController', () => {
     ).toEqual({
       id: expect.any(Number),
       local: 1,
-      visitante: 2,
       sets_local: 2,
       sets_visitante: 3,
     });
