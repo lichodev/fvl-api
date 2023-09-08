@@ -9,13 +9,14 @@ env:
 
 jobs:
   run-tests:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/run-tests.yml
+      - uses: ./.github/workflows/run-tests.yml@main
 
   build:
     needs: [run-tests]
     runs-on: ubuntu-latest
+    needs: [run-tests]
 
     steps:
       - uses: actions/checkout@v3
