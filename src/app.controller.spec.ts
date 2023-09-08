@@ -14,10 +14,10 @@ describe('AppController', () => {
 
   describe('app controller', () => {
     it('return repo url and commit hash', () => {
-      expect(appController.getWelcome()).toMatchObject(
+      expect(appController.getWelcome()).toEqual(
         expect.objectContaining({
           github: 'https://github.com/lichodev/fvl-api',
-          commitHash: undefined,
+          commitHash: expect.any(Number),
         }),
       );
     });
