@@ -10,8 +10,7 @@ env:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
-    steps:
-      - uses: lichodev/fvl-api/.github/workflows/run-tests.yml@main
+    uses: lichodev/fvl-api/.github/workflows/run-tests.yml@main
 
   build:
     runs-on: ubuntu-latest
