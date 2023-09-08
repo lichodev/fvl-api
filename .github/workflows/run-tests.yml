@@ -1,6 +1,6 @@
-name: Build Images and Deploy
+name: Run tests
 
-on: [push, pull_request, workflow_call]
+on: [pull_request, workflow_call]
 
 jobs:
   test:
