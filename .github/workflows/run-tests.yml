@@ -2,9 +2,25 @@ name: Run tests
 
 on: [pull_request, workflow_call]
 
+env:
+  DB_NAME: db_fvl
+  DB_PASSWORD: postgres
+  DB_HOST: localhost
+  DB_PORT: 5432
+  DB_USER: postgres
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        ports: 
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
+          POSTGRES_DB: ${{ env.DB_NAME }}
 
     steps:
       - uses: actions/checkout@v3
