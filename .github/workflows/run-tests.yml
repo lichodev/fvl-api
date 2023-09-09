@@ -4,8 +4,7 @@ on: [pull_request, workflow_call]
 
 env:
   DB_NAME: db_fvl
-  DB_PASSWORD: segura123!
-  DB_USER: fvl
+  DB_PASSWORD: postgres
 
 jobs:
   test:
@@ -15,9 +14,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          - POSTGRES_USER=${{DB_USER}}
-          - POSTGRES_PASSWORD=${{DB_PASSWORD}}
-          - POSTGRES_DB=${{DB_NAME}}
+          POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
+          POSTGRES_DB: ${{ env.DB_NAME }}
 
     steps:
       - uses: actions/checkout@v3
@@ -26,3 +24,9 @@ jobs:
           node-version: '18'
       - run: npm install
       - run: npm run test
+        env:
+          DB_HOST: postgres
+          DB_NAME: ${{ env.DB_NAME }}
+          DB_PASSWORD: ${{ env.DB_PASSWORD }}
+          DB_PORT: 5432
+          DB_USER: postgres
