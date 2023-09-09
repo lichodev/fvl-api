@@ -2,9 +2,22 @@ name: Run tests
 
 on: [pull_request, workflow_call]
 
+env:
+  DB_NAME: db_fvl
+  DB_PASSWORD: segura123!
+  DB_USER: fvl
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          - POSTGRES_USER=${{DB_USER}}
+          - POSTGRES_PASSWORD=${{DB_PASSWORD}}
+          - POSTGRES_DB=${{DB_NAME}}
 
     steps:
       - uses: actions/checkout@v3
