@@ -15,7 +15,10 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 Deploy: [Render - https://fvl-api.onrender.com/](https://fvl-api.onrender.com/teams)
+
 [![Build Images and Deploy](https://github.com/lichodev/fvl-api/actions/workflows/new-release.yml/badge.svg)](https://github.com/lichodev/fvl-api/actions/workflows/new-release.yml)
+
+[![codecov](https://codecov.io/gh/lichodev/fvl-api/graph/badge.svg?token=NWOMDQ8SX9)](https://codecov.io/gh/lichodev/fvl-api)
 ## Installation
 
 ```bash
