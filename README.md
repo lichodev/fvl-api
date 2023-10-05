@@ -15,7 +15,10 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 Deploy: [Render - https://fvl-api.onrender.com/](https://fvl-api.onrender.com/teams)
-[![Build Images and Deploy](https://github.com/lichodev/fvl-api/actions/workflows/new-release.yml/badge.svg)](https://github.com/lichodev/fvl-api/actions/workflows/new-release.yml)
+
+[![Build Images and Deploy](https://github.com/lichodev/fvl-api/actions/workflows/new-release.yml/badge.svg)](https://github.com/lichodev/fvl-api/actions/workflows/new-release.yml) 
+
+[![codecov](https://codecov.io/gh/lichodev/fvl-api/graph/badge.svg?token=NWOMDQ8SX9)](https://codecov.io/gh/lichodev/fvl-api) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c6c6f4fe069d434babee763f903f3603)](https://app.codacy.com/gh/lichodev/fvl-api/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 ## Installation
 
 ```bash
