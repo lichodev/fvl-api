@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     volumes:
-      - ./:/opt/app
+      - ./src:/opt/app/src
     env_file:
       - .env
     ports:
