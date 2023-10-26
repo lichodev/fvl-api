@@ -16,7 +16,7 @@ describe('AppController', () => {
     it('return repo url and commit hash', () => {
       expect(appController.getWelcome()).toEqual(
         expect.objectContaining({
-          github: 'https://github.com/lichodev/fvl-api',
+          github: 'https://github.com/newAccount/newRepo',
           commitHash: undefined,
         }),
       );
