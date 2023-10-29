@@ -6,6 +6,7 @@ export class AppController {
   getWelcome() {
     return {
       github: 'https://github.com/lichodev/fvl-api',
+      triggered: 'from action',
       commitHash: process.env.RENDER_GIT_COMMIT,
     };
   }
