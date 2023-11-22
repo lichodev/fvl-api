@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fvl-api
+  namespace: fvl-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fvl-api
+  template:
+    metadata:
+      labels:
+        app: fvl-api
+    spec:
+      containers:
+        - name: fvl-api
+          image: lichodev/fvl-api
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: isabelle.db.elephantsql.com
+            - name: DB_NAME
+              value: qjfboywk
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fvl-secret
+                  key: password
+            - name: DB_PORT
+              value: '5432'
+            - name: DB_USER
+              value: qjfboywk
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fvl-api
+  namespace: fvl-app
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30001
+  selector:
+    app: fvl-api
