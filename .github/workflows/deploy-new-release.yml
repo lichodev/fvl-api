@@ -33,3 +33,6 @@ jobs:
 
       - name: 'Push Docker images'
         run: 'docker push -a ${{ env.NAME }}'
+
+      - name: "Trigger Hook on Render.com"
+        run: "curl ${{ secrets.RENDER_HOOK }}"
