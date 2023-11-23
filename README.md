@@ -28,7 +28,7 @@ Para el secret del password hay que hacer:
 
 ```sh
 kubectl create secret generic fvl-secret \
-    --from-literal=password="<secreto>" \
+  --from-literal=password="<secreto>"
 ```
 
 ## Installation
